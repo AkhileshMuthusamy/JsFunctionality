@@ -13,5 +13,18 @@ $(".onlyNumber").keypress(function (e) {
             return false;
         }
     });
+
+// Validate data on paste
+$(".onlyNumberAndDecimal").on('paste', function(e) {
+        e.stopPropagation();
+        e.preventDefault();
+
+        let cd = e.originalEvent.clipboardData;
+        let decValue = cd.getData("text/plain")
+        console.log(decValue);
+        if (!Number.isNaN(parseFloat(decValue))) {
+            e.target.value = parseFloat(decValue);
+        }
+    });
     
     ^\s*(?=.*[1-9])\d{1,13}(?:\.\d{1,7})?\s*$
